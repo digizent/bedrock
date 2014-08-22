@@ -2,9 +2,32 @@
 
 Bedrock is a modern WordPress stack that helps you get started with the best development tools and project structure.
 
+# ToC
+
+* [Quick Start](#quick-start)
+* [Features](#features)
+* [Required](#requirements)
+* [Installation/Usage](#installationusage)
+  * [via Composer](#using-create-project)
+  * [Manually](#manually)
+* [Deploying with Capistrano](#deploying-with-capistrano)
+  * [Steps](#deployment-steps)
+* [Documentation](#deploying-with-capistrano)
+  * [Folder Structure](#folder-structure)
+  * [Configuration Files](#configuration-files)
+  * [Environment Variables](#environment-variables)
+  * [Composer](#composer)
+  * [Capistrano](#capistrano)
+  * [WP-CLI](#wp-cli)
+  * [Vagrant/Ansible](#vagrantansible)
+* [Contributing](#contributing)
+* [Support](#support)
+
 ## Quick Start
 
-Run `composer create-project roots/bedrock <path>` (see [Installation/Usage](#installationusage) for more details)
+Use [bedrock-ansible](https://github.com/roots/bedrock-ansible) to get started with a development VM customized for Bedrock.
+
+Or run `composer create-project roots/bedrock <path>` (see [Installation/Usage](#installationusage) for more details) to just get a new copy of Bedrock locally.
 
 ## Features
 
@@ -53,8 +76,9 @@ To skip the scripts completely, `create-project` can be run with `--no-scripts` 
   * `WP_HOME` - Full URL to WordPress home (http://example.com)
   * `WP_SITEURL` - Full URL to WordPress including subdirectory (http://example.com/wp)
 3. Add theme(s)
-4. Access WP Admin at `http://example.com/wp/wp-admin`
-5. Set your Nginx or Apache vhost to `/path/to/site/web/` (`/path/to/site/current/web/` if using Capistrano)
+4. Set your Nginx or Apache vhost to `/path/to/site/web/` (`/path/to/site/current/web/` if using Capistrano)
+5. Access WP Admin at `http://example.com/wp/wp-admin`
+
 
 ### Manually
 
@@ -69,8 +93,8 @@ To skip the scripts completely, `create-project` can be run with `--no-scripts` 
   * `WP_HOME` - Full URL to WordPress home (http://example.com)
   * `WP_SITEURL` - Full URL to WordPress including subdirectory (http://example.com/wp)
 4. Add theme(s)
+4. Set your Nginx or Apache vhost to `/path/to/site/web/` (`/path/to/site/current/web/` if using Capistrano)
 5. Access WP Admin at `http://example.com/wp/wp-admin`
-6. Set your Nginx or Apache vhost to `/path/to/site/web/` (`/path/to/site/current/web/` if using Capistrano)
 
 Using Capistrano for deploys?
 
@@ -129,7 +153,7 @@ See http://capistranorb.com/documentation/getting-started/authentication-and-aut
 
 The organization of Bedrock is similar to putting WordPress in its own subdirectory but with some improvements.
 
-* In order not to expose sensetive files in the webroot, Bedrock moves what's required into a `web/` directory including the vendor'd `wp/` source, and the `wp-content` source.
+* In order not to expose sensitive files in the webroot, Bedrock moves what's required into a `web/` directory including the vendor'd `wp/` source, and the `wp-content` source.
 * `wp-content` (or maybe just `content`) has been named `app` to better reflect its contents. It contains application code and not just "static content". It also matches up with other frameworks such as Symfony and Rails.
 * `wp-config.php` remains in the `web/` because it's required by WP, but it only acts as a loader. The actual configuration files have been moved to `config/` for better separation.
 * Capistrano configs are also located in `config/` to make it consistent.
